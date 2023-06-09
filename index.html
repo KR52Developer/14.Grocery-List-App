@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Description" content="Todo List" />
+    <title>Todo List</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="toDoListContainer">
+      <h2 class="projectHeading">Grocery list</h2>
+      <h3 class="headingThree" id="three">ADD ITEM</h3>
+      <div class="newTaskContainer">
+        <input type="text" id="task" value="" />
+        <button class="addBtn" onclick="addtask()">Add</button>
+      </div>
+      <div class="incompleteTaskContainer">
+        <h3>Grocery Item List</h3>
+        <ul class="toDoList">
+          <!-- <li>
+            <div class="taskContainer">
+              <input type="checkbox" class="checkbox" />
+              <label for="checkbox" class="label">Pay Bills</label>
+              <div class="modifyTaskBtn">
+                <button class="edit btn">Edit</button><br /><button
+                  class="delete btn"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="taskContainer">
+              <input type="checkbox" class="checkbox" />
+              <label for="checkbox" class="label">Go Shopping</label>
+              <div class="modifyTaskBtn">
+                <button class="edit btn">Edit</button><br /><button
+                  class="delete btn"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="taskContainer" class="checkbox">
+              <input type="checkbox" class="checkbox" />
+              <label for="checkbox" class="label" for="checkbox"
+                >See the Doctor</label
+              >
+              <div class="modifyTaskBtn">
+                <button class="edit btn">Edit</button>
+                <br />
+                <button class="delete btn">Delete</button>
+              </div>
+            </div>
+          </li> -->
+        </ul>
+      </div>
+      <div class="completedTask">
+        <h3>Item Purchased</h3>
+        <ul class="completedTaskList"></ul>
+      </div>
+      <div class="welcomeNote">
+        <h2>Enter the items and click add button to add the List</h2>
+      </div>
+    </div>
+
+    <script>
+      let addBtn = document.querySelector(".addBtn");
+      let task = document.querySelector("#task");
+      let toDoList = document.querySelector(".toDoList");
+      let completedTaskList = document.querySelector(".completedTaskList");
+      let welcomeNote = document.querySelector(".welcomeNote");
+
+      // console.log(toDoList);
+
+      // To add the list in Grocery List and Item Purchased
+
+      function addtask() {
+        if (task.value === "") {
+          alert("Enter Your To Do Task ");
+        } else {
+          welcomeNote.classList.add("hide");
+          let li = document.createElement("li");
+          let modifyTaskBtn = document.createElement("div");
+          modifyTaskBtn.innerHTML = ` 
+              <button class="edit btn">Edit</button><br /><button class="delete btn">
+                Delete
+              </button>
+            `;
+          modifyTaskBtn.className = "modifyTaskBtn";
+          let div = document.createElement("div");
+          div.className = "taskContainer";
+          let input = document.createElement("input");
+          input.type = "checkbox";
+          input.className = "checkbox";
+          let label = document.createElement("label");
+          label.className = "label";
+          label.innerText = task.value;
+          console.log(label);
+          console.log(input);
+          div.appendChild(input);
+          div.appendChild(label);
+          div.appendChild(modifyTaskBtn);
+          li.appendChild(div);
+          console.log(li);
+          toDoList.appendChild(li);
+          console.log(toDoList);
+
+          let btns = document.querySelectorAll(".btn");
+
+          for (const btn of btns) {
+            btn.addEventListener("click", (e) => {
+              e.preventDefault();
+              console.log(btn);
+              let btnClass = e.currentTarget.classList;
+              console.log(btnClass);
+              let btnParentDiv = e.currentTarget.parentElement.parentElement;
+              console.log(btnParentDiv);
+              if (btnClass.contains("delete")) {
+                confirm("Are you sure to delete the task");
+                btnParentDiv.remove("completedTaskList");
+              } else if (btnClass.contains("edit")) {
+                let inputElement = e.currentTarget.parentElement;
+                console.log(inputElement.previousElementSibling);
+                let labelElement = inputElement.previousElementSibling;
+                labelElement.innerText = prompt("Enter the Task");
+                alert("Task edited");
+              }
+            });
+          }
+
+          let allOptions = document.querySelectorAll("[type='checkbox']");
+
+          for (const allOption of allOptions) {
+            allOption.addEventListener("change", (e) => {
+              e.preventDefault();
+              if (allOption.checked) {
+                completedTaskList.classList.toggle("hide");
+                console.log(allOption.parentElement);
+                let parentDiv = allOption.parentElement;
+                let list = allOption.nextElementSibling;
+                console.log(list);
+                list.classList.add("labelStrike");
+                parentDiv.remove("toDoList");
+                completedTaskList.appendChild(parentDiv);
+
+                // let btns = document.querySelectorAll(".btn");
+
+                // for (const btn of btns) {
+                //   btn.addEventListener("click", (e) => {
+                //     e.preventDefault();
+                //     console.log(btn);
+                //     let btnClass = e.currentTarget.classList;
+                //     console.log(btnClass);
+                //     let btnParentDiv = e.currentTarget.parentElement;
+                //     console.log(btnParentDiv);
+                //     // if (btnClass.contains("delete")) {
+
+                //     // }
+                //     if (btnClass.contains("delete")) {
+                //       parentDiv.remove("completedTaskList")
+                //       alert("Task Deleted");
+                //     }
+                //   })
+                // }
+              } else if (!allOption.checked) {
+                let list = allOption.nextElementSibling;
+                list.classList.remove("labelStrike");
+                let parentDiv = allOption.parentElement;
+                console.log(parentDiv);
+                parentDiv.remove("completedTaskList");
+                toDoList.appendChild(parentDiv);
+
+                // let btns = document.querySelectorAll(".btn");
+
+                // for (const btn of btns) {
+                //   btn.addEventListener("click", (e) => {
+                //     e.preventDefault();
+                //     console.log(btn);
+                //     let btnClass = e.currentTarget.classList;
+                //     console.log(btnClass);
+                //     let btnParentDiv = e.currentTarget.parentElement;
+                //     console.log(btnParentDiv);
+                //     if (btnClass.contains("delete")) {
+                //       parentDiv.remove("completedTaskList");
+                //       alert("Task Deleted");
+                //     }
+                //   })
+                // }
+              }
+            });
+          }
+          task.value = "";
+        }
+      }
+
+      // // To Edit /Add existing list to Item Purchased/GroceryList
+
+      // let allOptions = document.querySelectorAll("[type='checkbox']");
+
+      // for (const allOption of allOptions) {
+      //   allOption.addEventListener("change", (e) => {
+      //     e.preventDefault();
+      //     if (allOption.checked) {
+      //       let list = allOption.nextElementSibling;
+      //       list.classList.add("labelStrike");
+      //       let parentDiv = allOption.parentElement;
+      //       console.log(parentDiv);
+      //       parentDiv.remove("toDoList");
+      //       completedTaskList.appendChild(parentDiv);
+      //     } else if (!allOption.checked) {
+      //       console.log(allOption.parentElement);
+      //       let parentDiv = allOption.parentElement;
+      //       let list = allOption.nextElementSibling;
+      //       console.log(list);
+      //       list.classList.remove("labelStrike");
+      //       parentDiv.remove("completedTaskList");
+      //       toDoList.appendChild(parentDiv);
+      //     }
+      //   });
+      // }
+
+      // // To Delete/Edit the List
+
+      // let btns = document.querySelectorAll(".btn");
+
+      // for (const btn of btns) {
+      //   btn.addEventListener("click", (e) => {
+      //     e.preventDefault();
+      //     console.log(btn);
+      //     let btnClass = e.currentTarget.classList;
+      //     console.log(btnClass);
+      //     let btnParentDiv = e.currentTarget.parentElement.parentElement;
+      //     console.log(btnParentDiv);
+      //     if (btnClass.contains("delete")) {
+      //       confirm("Are you sure to delete the task");
+      //       btnParentDiv.remove("completedTaskList");
+      //     } else if (btnClass.contains("edit")) {
+      //       let inputElement = e.currentTarget.parentElement;
+      //       console.log(inputElement.previousElementSibling);
+      //       let labelElement = inputElement.previousElementSibling;
+      //       labelElement.innerText = prompt("Enter the Task");
+      //       alert("Task edited");
+      //     }
+      //   });
+      // }
+    </script>
+  </body>
+</html>

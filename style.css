@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    font-family: 'Alata',
+        sans-serif;
+    font-weight: 400;
+}
+
+body {
+    background-color: #E4E4E4;
+    background: url("./Images/fresh-vegetables-rustic-wood-table-indoors-generated-by-ai.jpg");
+    background-size: 100%;
+    /* background-position: center; */
+    /* background-position: cover; */
+    /* background-repeat: no-repeat; */
+    /* position: relative; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+    padding-left: 50px;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.toDoListContainer {
+    /* margin: 0 auto; */
+    background-color: rgba(37, 32, 32, 0.564);
+    backdrop-filter: blur(7px);
+    padding: 25px;
+    /* background-color: white; */
+    width: 500px;
+    /* position: relative;
+    bottom: 25%;
+    left: 25%; */
+    min-height: 350px;
+    border-radius: 10px;
+}
+
+h2 {
+    font-size: 35px;
+    font-weight: 400;
+    text-align: center;
+    padding-bottom: 15px;
+    color: rgb(246, 246, 246);
+}
+
+h3 {
+    color: rgb(246, 246, 246);
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+
+.label {
+    color: white;
+    font-size: 18px;
+    /* text-align: left!important; */
+
+}
+
+/* Completed Line Through Property */
+
+.labelStrike {
+    font-size: 18px;
+    text-decoration: line-through;
+    color: #88888C;
+}
+
+.newTaskContainer {
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+#task {
+    width: 90%;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.27);
+    outline: transparent;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 5px;
+    font-size: 18px;
+}
+
+#task:focus {
+    outline-color: rgb(2, 193, 2);
+}
+
+
+button {
+    background: transparent;
+    outline: none;
+    border: none;
+    color: #d9d8d8;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    color: black;
+}
+
+.edit:hover {
+    color: rgb(2, 193, 2);
+}
+
+.delete:hover {
+    color: red;
+}
+
+.addBtn:hover {
+    color: rgb(2, 193, 2);
+}
+
+
+.checkbox:checked {
+    accent-color: blue;
+}
+
+.checkbox:checked~label {
+    color: blue;
+}
+
+
+.taskContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modifyTaskBtn {
+    text-align: right;
+}
